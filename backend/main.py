@@ -4,7 +4,7 @@ from fastapi import UploadFile, File
 from fastapi.responses import StreamingResponse
 from PIL import Image
 import io
-from rembg import remove
+from rembg import remove, new_session
 
 app = FastAPI()
 app.add_middleware(
@@ -25,11 +25,13 @@ def test():
     print("test endpoint hit")
     return {"message": "Frontend connected successfully"}
 
+session = new_session("u2netp")
+
 @app.post("/upload")
 async def upload_image(file: UploadFile = File(...)):
     input_image = await file.read()
 
-    output_image = remove(input_image)
+    output_image = remove(input_image, session=session)
 
     return StreamingResponse(
         io.BytesIO(output_image),

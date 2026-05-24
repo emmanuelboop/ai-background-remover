@@ -20,18 +20,11 @@ def root():
     return {"message": "Backend is running!"}
 
 
-@app.get("/test")
-def test():
-    print("test endpoint hit")
-    return {"message": "Frontend connected successfully"}
-
-session = new_session("u2netp")
-
 @app.post("/upload")
 async def upload_image(file: UploadFile = File(...)):
     input_image = await file.read()
 
-    output_image = remove(input_image, session=session)
+    output_image = remove(input_image, model_name = "u2netp")
 
     return StreamingResponse(
         io.BytesIO(output_image),

@@ -58,7 +58,7 @@ function ImageComparison({ selectedImage, enhancedImage, isLoading, resetImages 
                                         <div className="w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
 
                                         <p className="animate-pulse text-lg">
-                                            Enhancing image...
+                                            Removing background...
                                         </p>
 
                                     </div>

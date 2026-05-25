@@ -62,4 +62,4 @@ uvicorn main:app --reload
 
 ## Screenshots
 
-(Add screenshots here later)
+![App Screenshot](images/screenshot.png)

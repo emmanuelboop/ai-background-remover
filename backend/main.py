@@ -20,7 +20,7 @@ def root():
     return {"message": "Backend is running!"}
 
 
-session = new_session("u2netp")
+#session = new_session("u2netp")
 
 @app.post("/upload")
 async def upload_image(file: UploadFile = File(...)):
@@ -28,11 +28,11 @@ async def upload_image(file: UploadFile = File(...)):
     input_image = await file.read()
     print("created input image")
 
-    output_image = remove(input_image, session=session)
+    output_image = input_image #remove(input_image, session=session)
     print("removed background")
 
     return StreamingResponse(
         io.BytesIO(output_image),
-        media_type="image/png"
+        media_type=file.content_type,
     )
 

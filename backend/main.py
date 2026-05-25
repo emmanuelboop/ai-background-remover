@@ -31,8 +31,14 @@ async def upload_image(file: UploadFile = File(...)):
     output_image = remove(input_image, session=session)
     print("removed background")
 
+    # Convert PIL image to bytes if needed
+    if isinstance(output_image, Image.Image):
+        img_byte_arr = io.BytesIO()
+        output_image.save(img_byte_arr, format="PNG")
+        output_image = img_byte_arr.getvalue()
+
     return Response(
-        io.BytesIO(output_image),
+        content=output_image,
         media_type="image/png"
     )
 

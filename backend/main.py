@@ -20,7 +20,7 @@ def root():
     return {"message": "Backend is running!"}
 
 
-session = new_session()
+session = new_session("u2netp")
 
 @app.post("/upload")
 async def upload_image(file: UploadFile = File(...)):

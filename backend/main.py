@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import UploadFile, File
-from fastapi.responses import StreamingResponse
+from fastapi.responses import Response
 from PIL import Image
 import io
 from rembg import remove, new_session
@@ -31,8 +31,8 @@ async def upload_image(file: UploadFile = File(...)):
     output_image = input_image #remove(input_image, session=session)
     print("removed background")
 
-    return StreamingResponse(
-        io.BytesIO(output_image),
-        media_type=file.content_type,
+    return Response(
+        content=output_image,
+        media_type=file.content_type
     )
 

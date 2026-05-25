@@ -22,9 +22,12 @@ def root():
 
 @app.post("/upload")
 async def upload_image(file: UploadFile = File(...)):
+    print(f"Received file: {file.filename}")
     input_image = await file.read()
+    print("created input image")
 
     output_image = remove(input_image, model_name = "u2netp")
+    print("removed background")
 
     return StreamingResponse(
         io.BytesIO(output_image),
